@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 //parse cookie header and add them to req.cookies
 app.use(cookieParser());
 
-//server static files
+//serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 module.exports = app;
