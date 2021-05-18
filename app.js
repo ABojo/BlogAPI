@@ -4,6 +4,9 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const app = express();
 
+//Routers
+const apiRouter = require('./routes/apiRoutes');
+
 //tell express where to find the views + set view engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -20,5 +23,8 @@ app.use(cookieParser());
 
 //serve static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+//Router middleware
+app.use('/api', apiRouter);
 
 module.exports = app;
