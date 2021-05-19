@@ -2,7 +2,7 @@ const Post = require('../models/Post');
 const catchError = require('../utils/catchError');
 
 exports.getAllPosts = catchError(async (req, res) => {
-  const posts = await Post.find().select('-__v');
+  const posts = await Post.find().select('-__v').populate('comments');
 
   res.json({
     status: 'success',
@@ -14,7 +14,7 @@ exports.getAllPosts = catchError(async (req, res) => {
 
 exports.getPost = catchError(async (req, res) => {
   const { id } = req.params;
-  const post = await Post.findById(id).select('-_id -__v');
+  const post = await Post.findById(id).select('-__v').populate('comments');
 
   res.json({
     status: 'success',
