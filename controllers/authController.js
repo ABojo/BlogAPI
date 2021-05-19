@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const catchError = require('../utils/catchError');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 exports.login = catchError(async (req, res) => {
   const { username, password } = req.body;
@@ -10,11 +11,15 @@ exports.login = catchError(async (req, res) => {
   if (!passIsValid)
     throw new Error('You entered an incorrect username or password!');
 
+  const token = await jwt.sign(
+    { id: user._id, username: user.username },
+    process.env.JWT_SECRET
+  );
+
   res.json({
     status: 'success',
     data: {
-      message: 'You have successfully logged in!',
-      user,
+      token,
     },
   });
 });
