@@ -30,7 +30,7 @@ exports.createPost = catchError(async (req, res) => {
     title,
     body,
     published,
-    author: 'req.user.username',
+    author: req.currentUser.username,
   });
 
   res.json({

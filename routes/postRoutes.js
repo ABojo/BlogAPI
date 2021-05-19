@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const postController = require('../controllers/postController');
+const authController = require('../controllers/authController');
 
 router.get('/', postController.getAllPosts);
 router.get('/:id', postController.getPost);
-router.post('/', postController.createPost);
-router.put('/:id', postController.editPost);
+router.post('/', authController.protect, postController.createPost);
+router.put('/:id', authController.protect, postController.editPost);
 
 module.exports = router;
