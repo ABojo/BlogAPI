@@ -27,4 +27,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Router middleware
 app.use('/api', apiRouter);
 
+app.use((err, req, res, next) => {
+  console.log('err');
+  res.json({
+    status: 'failure',
+    data: { message: 'Sorry, there was a problem with your request!' },
+  });
+});
+
 module.exports = app;

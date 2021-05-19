@@ -1,6 +1,7 @@
 const Post = require('../models/Post');
+const catchError = require('../utils/catchError');
 
-exports.getAllPosts = async (req, res) => {
+exports.getAllPosts = catchError(async (req, res) => {
   const posts = await Post.find().select('-_id -__v');
 
   res.json({
@@ -9,9 +10,9 @@ exports.getAllPosts = async (req, res) => {
       posts,
     },
   });
-};
+});
 
-exports.getPost = async (req, res) => {
+exports.getPost = catchError(async (req, res) => {
   const { id } = req.params;
   const post = await Post.findById(id).select('-_id -__v');
 
@@ -21,9 +22,9 @@ exports.getPost = async (req, res) => {
       post,
     },
   });
-};
+});
 
-exports.createPost = async (req, res) => {
+exports.createPost = catchError(async (req, res) => {
   const { title, body, published } = req.body;
   const post = await Post.create({
     title,
@@ -36,9 +37,9 @@ exports.createPost = async (req, res) => {
     status: 'success',
     data: { post },
   });
-};
+});
 
-exports.editPost = async (req, res) => {
+exports.editPost = catchError(async (req, res) => {
   const { title, body, published } = req.body;
   const { id } = req.params;
   const post = await Post.findOneAndUpdate(
@@ -51,4 +52,4 @@ exports.editPost = async (req, res) => {
     status: 'success',
     data: { post },
   });
-};
+});
