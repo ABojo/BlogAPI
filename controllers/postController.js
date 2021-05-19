@@ -2,7 +2,7 @@ const Post = require('../models/Post');
 const catchError = require('../utils/catchError');
 
 exports.getAllPosts = catchError(async (req, res) => {
-  const posts = await Post.find().select('-_id -__v');
+  const posts = await Post.find().select('-__v');
 
   res.json({
     status: 'success',
