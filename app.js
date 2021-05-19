@@ -28,10 +28,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', apiRouter);
 
 app.use((err, req, res, next) => {
-  console.log('err');
   res.json({
     status: 'failure',
-    data: { message: 'Sorry, there was a problem with your request!' },
+    data: { message: err.message },
   });
 });
 
