@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const errorHandler = require('./utils/errorHandler');
 const app = express();
 
 //Routers
@@ -27,11 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Router middleware
 app.use('/api', apiRouter);
 
-app.use((err, req, res, next) => {
-  res.json({
-    status: 'failure',
-    data: { message: err.message },
-  });
-});
+//Error handler
+app.use(errorHandler);
 
 module.exports = app;
