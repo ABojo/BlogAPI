@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const errorHandler = require('./utils/errorHandler');
 const app = express();
@@ -14,6 +15,9 @@ app.set('view engine', 'pug');
 
 //logging
 app.use(morgan('dev'));
+
+//cors
+app.use(cors());
 
 //parse body and add it to req.body
 app.use(express.json());
