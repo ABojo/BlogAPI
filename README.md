@@ -10,7 +10,7 @@ The goals of this project were to:
 </ul>
 
 BlogClient repository: https://github.com/ABojo/BlogClient <br>
-BlogClient live preview: TBD
+BlogClient live preview: https://abojo.github.io/BlogClient/
 
 BlogAdminPanel repository: TBD <br>
 BlogAdminPanel live preview: TBD
