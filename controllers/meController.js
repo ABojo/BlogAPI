@@ -1,3 +1,8 @@
+const catchError = require('../utils/catchError');
+const User = require('../models/User');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 exports.login = catchError(async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
