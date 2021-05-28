@@ -1,5 +1,6 @@
 const catchError = require('../utils/catchError');
 const User = require('../models/User');
+const Post = require('../models/Post');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -36,6 +37,17 @@ exports.register = catchError(async (req, res) => {
     status: 'success',
     data: {
       user,
+    },
+  });
+});
+
+exports.getMyPosts = catchError(async (req, res) => {
+  const posts = await Post.find({ author: req.currentUser.username });
+
+  res.json({
+    status: 'success',
+    data: {
+      posts,
     },
   });
 });
