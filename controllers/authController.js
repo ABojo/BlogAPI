@@ -17,7 +17,7 @@ exports.authorizeModify = catchError(async (req, res, next) => {
   const post = await Post.findById(id);
 
   if (post.author !== req.currentUser.username)
-    throw new Error('You are not authroized to modify this post!');
+    throw new Error('You are not authorized to modify this post!');
 
   next();
 });
