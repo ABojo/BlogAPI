@@ -53,3 +53,9 @@ exports.editPost = catchError(async (req, res) => {
     data: { post },
   });
 });
+
+exports.deletePost = catchError(async (req, res) => {
+  const post = await Post.findByIdAndRemove(req.params.id);
+
+  res.json({ status: 'success', data: { post } });
+});
