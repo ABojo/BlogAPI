@@ -6,7 +6,7 @@ exports.createComment = catchError(async (req, res) => {
   const { postId, name, body } = req.body;
   const [post, comment] = await Promise.all([
     Post.findById(postId),
-    Comment.create({ name, body }),
+    Comment.create({ name, body, post: postID }),
   ]);
 
   post.comments.push(comment._id);
