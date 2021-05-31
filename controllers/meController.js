@@ -45,7 +45,9 @@ exports.register = catchError(async (req, res) => {
 });
 
 exports.getMyPosts = catchError(async (req, res) => {
-  const posts = await Post.find({ author: req.currentUser.username });
+  const posts = await Post.find({ author: req.currentUser.username }).populate(
+    'comments'
+  );
 
   res.json({
     status: 'success',
