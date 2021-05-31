@@ -6,6 +6,10 @@ const userSchema = new Schema({
   password: { type: String, required: true },
 });
 
+userSchema.virtual('usernameLower', function () {
+  return this.username.toLowerCase();
+});
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
