@@ -6,7 +6,10 @@ const jwt = require('jsonwebtoken');
 
 exports.login = catchError(async (req, res) => {
   const { username, password } = req.body;
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username }).collation({
+    locale: 'en',
+    strength: 2,
+  });
 
   const passIsValid = await bcrypt.compare(password, user.password);
   if (!passIsValid)
