@@ -19,3 +19,15 @@ exports.createComment = catchError(async (req, res) => {
     },
   });
 });
+
+exports.deleteComment = catchError(async (req, res) => {
+  const { id } = req.params;
+  const comment = await Comment.findByIdAndRemove(id);
+
+  res.json({
+    status: 'success',
+    data: {
+      comment,
+    },
+  });
+});
