@@ -1,7 +1,6 @@
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
 const catchError = require('../utils/catchError');
-const { remove } = require('../models/Post');
 
 exports.getAllPosts = catchError(async (req, res) => {
   const posts = await Post.find().select('-__v -comments');
@@ -57,7 +56,6 @@ exports.editPost = catchError(async (req, res) => {
 });
 
 exports.deletePost = catchError(async (req, res) => {
-  const post = await Post.findByIdAndRemove(req.params.id);
   const post = await Post.findById(req.params.id);
   const removeCommentPromises = post.comments.map((com) =>
     Comment.findByIdAndRemove(com)
